@@ -103,7 +103,12 @@ namespace AspDotNetMVCDemo.Controllers
                         //Loop through datatable and add employee data to employee table. 
                         foreach (DataRow row in dt.Rows)
                         {
-                           db.Pharmacy.Add(GetEmployeeFromExcelRow(row));
+                        
+
+
+                        
+                     
+                            db.Pharmacy.Add(GetEmployeeFromExcelRow(row));
                         }
                         db.SaveChanges();
                     
@@ -129,6 +134,17 @@ namespace AspDotNetMVCDemo.Controllers
         //Convert each datarow into employee object
         private Pharmacy GetEmployeeFromExcelRow(DataRow row)
         {
+            for (int i = 0; i < 0; i++)
+            {
+                if (row[i].GetType() != typeof(string))//need it to hit this if statement first
+                {
+                    if (row[i].GetType() != typeof(int))
+                    {
+                        row[i] = null;
+                    }
+
+                }
+            }
             return new Pharmacy
             {
                 MemberId = Convert.ToInt32(row[0]),
@@ -139,7 +155,7 @@ namespace AspDotNetMVCDemo.Controllers
                 Gender = row[5].ToString(),
                 FillDate = Convert.ToInt32(row[6]),
                 ClaimStatus = row[7].ToString(),
-                ClaimNumber = Convert.ToInt32(row[8]),
+                ClaimNumber = row[8].ToString(),
                 OriginalClaimNumber = Convert.ToInt32(row[9]),
                 PerscriptionNumber = Convert.ToInt32(row[10]),
                 NDCCode = Convert.ToInt32(row[11]),
