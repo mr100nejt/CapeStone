@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pharmacies">
+          <Key>
+            <PropertyRef Name="PharmacyDataId" />
+          </Key>
+          <Property Name="PharmacyDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberFirstName" Type="nvarchar(max)" />
+          <Property Name="MemberLastName" Type="nvarchar(max)" />
+          <Property Name="MemberMiddleInitial" Type="nvarchar(max)" />
+          <Property Name="DateofBirth" Type="float" />
+          <Property Name="Gender" Type="nvarchar(max)" />
+          <Property Name="FillDate" Type="float" />
+          <Property Name="ClaimStatus" Type="nvarchar(max)" />
+          <Property Name="ClaimNumber" Type="nvarchar(max)" />
+          <Property Name="OriginalClaimNumber" Type="nvarchar(max)" />
+          <Property Name="PerscriptionNumber" Type="float" />
+          <Property Name="NDCCode" Type="float" />
+          <Property Name="DrugName" Type="nvarchar(max)" />
+          <Property Name="OTCIndicator" Type="nvarchar(max)" />
+          <Property Name="Multisource" Type="float" />
+          <Property Name="DEASchedule" Type="float" />
+          <Property Name="DiagnosisCode" Type="nvarchar(max)" />
+          <Property Name="DWAIndecator" Type="float" />
+          <Property Name="DaysSupply" Type="float" />
+          <Property Name="BilledAmount" Type="float" />
+          <Property Name="PharmacyProviderID" Type="nvarchar(max)" />
+          <Property Name="PrescribingProviderID" Type="float" />
+          <Property Name="RefillCode" Type="float" />
+          <Property Name="blankSpace" Type="float" />
+          <Property Name="NCPDPrejectcodes" Type="nvarchar(max)" />
+          <Property Name="NPI" Type="float" />
+          <Property Name="Last_Name" Type="nvarchar(max)" />
+          <Property Name="First_Name" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Zip_Code" Type="nvarchar(max)" />
+          <Property Name="MemberId" Type="float" />
+        </EntityType>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Pharmacies" EntityType="Self.Pharmacies" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="PharmacyDataId" />
+          </Key>
+          <Property Name="PharmacyDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberFirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberLastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberMiddleInitial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="Double" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FillDate" Type="Double" />
+          <Property Name="ClaimStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalClaimNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PerscriptionNumber" Type="Double" />
+          <Property Name="NDCCode" Type="Double" />
+          <Property Name="DrugName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OTCIndicator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Multisource" Type="Double" />
+          <Property Name="DEASchedule" Type="Double" />
+          <Property Name="DiagnosisCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DWAIndecator" Type="Double" />
+          <Property Name="DaysSupply" Type="Double" />
+          <Property Name="BilledAmount" Type="Double" />
+          <Property Name="PharmacyProviderID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrescribingProviderID" Type="Double" />
+          <Property Name="RefillCode" Type="Double" />
+          <Property Name="blankSpace" Type="Double" />
+          <Property Name="NCPDPrejectcodes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NPI" Type="Double" />
+          <Property Name="Last_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="First_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zip_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MemberId" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pharmacies" EntityType="Self.Pharmacy" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Pharmacies">
+            <EntityTypeMapping TypeName="Model.Pharmacy">
+              <MappingFragment StoreEntitySet="Pharmacies">
+                <ScalarProperty Name="PharmacyDataId" ColumnName="PharmacyDataId" />
+                <ScalarProperty Name="MemberFirstName" ColumnName="MemberFirstName" />
+                <ScalarProperty Name="MemberLastName" ColumnName="MemberLastName" />
+                <ScalarProperty Name="MemberMiddleInitial" ColumnName="MemberMiddleInitial" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FillDate" ColumnName="FillDate" />
+                <ScalarProperty Name="ClaimStatus" ColumnName="ClaimStatus" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="OriginalClaimNumber" ColumnName="OriginalClaimNumber" />
+                <ScalarProperty Name="PerscriptionNumber" ColumnName="PerscriptionNumber" />
+                <ScalarProperty Name="NDCCode" ColumnName="NDCCode" />
+                <ScalarProperty Name="DrugName" ColumnName="DrugName" />
+                <ScalarProperty Name="OTCIndicator" ColumnName="OTCIndicator" />
+                <ScalarProperty Name="Multisource" ColumnName="Multisource" />
+                <ScalarProperty Name="DEASchedule" ColumnName="DEASchedule" />
+                <ScalarProperty Name="DiagnosisCode" ColumnName="DiagnosisCode" />
+                <ScalarProperty Name="DWAIndecator" ColumnName="DWAIndecator" />
+                <ScalarProperty Name="DaysSupply" ColumnName="DaysSupply" />
+                <ScalarProperty Name="BilledAmount" ColumnName="BilledAmount" />
+                <ScalarProperty Name="PharmacyProviderID" ColumnName="PharmacyProviderID" />
+                <ScalarProperty Name="PrescribingProviderID" ColumnName="PrescribingProviderID" />
+                <ScalarProperty Name="RefillCode" ColumnName="RefillCode" />
+                <ScalarProperty Name="blankSpace" ColumnName="blankSpace" />
+                <ScalarProperty Name="NCPDPrejectcodes" ColumnName="NCPDPrejectcodes" />
+                <ScalarProperty Name="NPI" ColumnName="NPI" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip_Code" ColumnName="Zip_Code" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

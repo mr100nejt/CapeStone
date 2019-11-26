@@ -3,10 +3,50 @@ namespace CapStone.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Intial : DbMigration
+    public partial class mig : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Pharmacies",
+                c => new
+                    {
+                        PharmacyDataId = c.Int(nullable: false, identity: true),
+                        MemberIdNumber = c.Double(),
+                        MemberFirstName = c.String(),
+                        MemberLastName = c.String(),
+                        MemberMiddleInitial = c.String(),
+                        DateofBirth = c.Double(),
+                        Gender = c.String(),
+                        FillDate = c.Double(),
+                        ClaimStatus = c.String(),
+                        ClaimNumber = c.String(),
+                        OriginalClaimNumber = c.String(),
+                        PerscriptionNumber = c.Double(),
+                        NDCCode = c.Double(),
+                        DrugName = c.String(),
+                        OTCIndicator = c.String(),
+                        Multisource = c.Double(),
+                        DEASchedule = c.Double(),
+                        DiagnosisCode = c.String(),
+                        DWAIndecator = c.Double(),
+                        DaysSupply = c.Double(),
+                        BilledAmount = c.Double(),
+                        PharmacyProviderID = c.String(),
+                        PrescribingProviderID = c.Double(),
+                        RefillCode = c.Double(),
+                        blankSpace = c.Double(),
+                        NCPDPrejectcodes = c.String(),
+                        NPI = c.Double(),
+                        Last_Name = c.String(),
+                        First_Name = c.String(),
+                        Address = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zip_Code = c.String(),
+                    })
+                .PrimaryKey(t => t.PharmacyDataId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -94,6 +134,7 @@ namespace CapStone.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Pharmacies");
         }
     }
 }

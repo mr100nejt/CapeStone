@@ -97,13 +97,13 @@ namespace AspDotNetMVCDemo.Controllers
                         }
                     }
 
-                    //Insert records to Employee table.
-                   
-                    
+                        //Insert records to Employee table.
+
+
                         //Loop through datatable and add employee data to employee table. 
                         foreach (DataRow row in dt.Rows)
                         {                        
-                            db.Pharmacy.Add(GetEmployeeFromExcelRow(row));
+                            db.Pharmacy.Add(GetInfoFromExcelRow(row));
                         }
                         db.SaveChanges();
                     
@@ -126,84 +126,48 @@ namespace AspDotNetMVCDemo.Controllers
             return excelOledbConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
         }
 
-        //Convert each datarow into employee object
-        private Pharmacy GetEmployeeFromExcelRow(DataRow row)
+        //Convert each datarow into Pharmacy object
+        //Which is then passed into the database 
+        private Pharmacy GetInfoFromExcelRow(DataRow row)
         {
-          for(int i =0; i < row.ItemArray.Length; i++)
-            {
-                if(row.ItemArray[i] == DBNull.Value)
-                {
-                    row.ItemArray[i] = -1; 
-                }
-            }
-            var memberId = Convert.ToInt32(row[0]);
-            var memberLastName = row[1].ToString();
-            var memberFirstName = row[2].ToString();
-            var memberMiddleInitial = row[3].ToString();
-            var dateofBirth = Convert.ToInt32(row[4]);
-            var gender = row[5].ToString();
-            var fillDate = Convert.ToInt32(row[6]);
-            var claimStatus = row[7].ToString();
-            var claimNumber = row[8].ToString();
-            var originalClaimNumber =  Convert.ToInt32(row[9]);
-            var perscriptionNumber = Convert.ToInt32(row[10]);
-            var ndcCode = Convert.ToInt32(row[11]);
-            var drugName = row[12].ToString();
-            var oTCIndicator = row[13].ToString();
-            var multisource = Convert.ToInt32(row[14]);
-            var dEASchedule = Convert.ToInt32(row[15]);
-            var diagnosisCode = row[16].ToString();
-            var dWAIndecator = Convert.ToInt32(row[17]);
-            var daysSupply = Convert.ToInt32(row[18]);
-            var billedAmount = Convert.ToInt32(row[19]);
-            var pharmacyProviderID = Convert.ToInt32(row[20]);
-            var prescribingProviderID = Convert.ToInt32(row[21]);
-            var refillCode = Convert.ToInt32(row[22]);
-            var nCPDPrejectcodes = Convert.ToInt32(row[23]);
-            var nPI = Convert.ToInt32(row[24]);
-            var last_Name = row[25].ToString();
-            var first_Name = row[26].ToString();
-            var address = row[27].ToString();
-            var city = row[28].ToString();
-            var state = Convert.ToInt32(row[29]);
-            var zip_Code = Convert.ToInt32(row[30]);
-            
-           
+
             return new Pharmacy
             {
-                MemberId = memberId,
-                MemberLastName = memberLastName,
-                MemberFirstName = memberFirstName,
-                MemberMiddleInitial = memberMiddleInitial,
-                DateofBirth = dateofBirth,
-                Gender = gender,
-                FillDate = fillDate,
-                ClaimStatus = claimStatus,
-                ClaimNumber = claimNumber,
-                OriginalClaimNumber = originalClaimNumber,
-                PerscriptionNumber = perscriptionNumber,
-                NDCCode = ndcCode,
-                DrugName = drugName,
-                OTCIndicator = oTCIndicator,
-                Multisource = multisource,
-                DEASchedule = dEASchedule,
-                DiagnosisCode = diagnosisCode,
-                DWAIndecator = dWAIndecator,
-                DaysSupply = daysSupply,
-                BilledAmount = billedAmount,
-                PharmacyProviderID = pharmacyProviderID,
-                PrescribingProviderID = prescribingProviderID,
-                RefillCode = refillCode,
-                NCPDPrejectcodes = nCPDPrejectcodes,
-                NPI = nPI,
-                Last_Name = last_Name,
-                First_Name = first_Name,
-                Address = address,
-                City = city,
-                State = state,
-                Zip_Code = zip_Code,
-            };
-            
+
+                 MemberId = row.ItemArray[0] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[0]),
+                 MemberLastName = row[1].ToString(),
+                 MemberFirstName = row[2].ToString(),
+                 MemberMiddleInitial = row[3].ToString(),
+                 DateofBirth = row.ItemArray[4] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[4]),
+                 Gender = row[5].ToString(),
+                 FillDate = row.ItemArray[6] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[6]),
+                 ClaimStatus = row[7].ToString(),
+                 ClaimNumber = row[8].ToString(),
+                 OriginalClaimNumber = row[9].ToString(),
+                 PerscriptionNumber = row.ItemArray[10] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[10]),
+                 NDCCode = row.ItemArray[11] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[11]),
+                 DrugName = row[12].ToString(),
+                 OTCIndicator = row[13].ToString(),
+                 Multisource = row.ItemArray[14] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[14]),
+                 DEASchedule = row.ItemArray[15] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[15]),
+                 DiagnosisCode = row[16].ToString(),
+                 DWAIndecator = row.ItemArray[17] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[17]),
+                 DaysSupply = row.ItemArray[18] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[18]),
+                 BilledAmount = row.ItemArray[19] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[19]),
+                 PharmacyProviderID = row[20].ToString(),
+                 PrescribingProviderID = row.ItemArray[21] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[21]),
+                 RefillCode = row.ItemArray[22] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[22]),
+                 blankSpace = row.ItemArray[23] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[23]),
+                 NCPDPrejectcodes = row[24].ToString(),
+                 NPI = row.ItemArray[25] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[25]),
+                 Last_Name = row[26].ToString(),
+                 First_Name = row[27].ToString(),
+                 Address = row[28].ToString(),
+                 City = row[29].ToString(),
+                 State = row[30].ToString(),
+                 Zip_Code = row[31].ToString(),
+        };
+
         }
     }
 }
