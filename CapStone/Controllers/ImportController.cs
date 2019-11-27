@@ -1,6 +1,6 @@
-﻿
-using CapStone.Models;
+﻿using CapStone.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -11,6 +11,7 @@ namespace AspDotNetMVCDemo.Controllers
 {
     public class ImportController : Controller
     {
+        int specialId = 0; 
         // GET: Import
         public ActionResult Index()
         {
@@ -25,7 +26,7 @@ namespace AspDotNetMVCDemo.Controllers
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
-            ApplicationDbContext db = new ApplicationDbContext(); 
+            ApplicationDbContext db = new ApplicationDbContext();
             if (postedFile != null)
             {
                 try
@@ -97,16 +98,18 @@ namespace AspDotNetMVCDemo.Controllers
                         }
                     }
 
-                        //Insert records to Employee table.
+                    //Insert records to Employee table.
 
+                    List<Pharmacy> pharmList = new List<Pharmacy>();
+                    //Loop through datatable and add employee data to employee table. 
+                    specialId = specialId++; 
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        db.Pharmacy.Add(GetInfoFromExcelRow(row));
+                    }
 
-                        //Loop through datatable and add employee data to employee table. 
-                        foreach (DataRow row in dt.Rows)
-                        {                        
-                            db.Pharmacy.Add(GetInfoFromExcelRow(row));
-                        }
-                        db.SaveChanges();
-                    
+                    db.SaveChanges();
+
                     ViewBag.Message = "Data Imported Successfully.";
                 }
                 catch (Exception ex)
@@ -131,42 +134,44 @@ namespace AspDotNetMVCDemo.Controllers
         private Pharmacy GetInfoFromExcelRow(DataRow row)
         {
 
+
             return new Pharmacy
             {
 
-                 MemberId = row.ItemArray[0] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[0]),
-                 MemberLastName = row[1].ToString(),
-                 MemberFirstName = row[2].ToString(),
-                 MemberMiddleInitial = row[3].ToString(),
-                 DateofBirth = row.ItemArray[4] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[4]),
-                 Gender = row[5].ToString(),
-                 FillDate = row.ItemArray[6] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[6]),
-                 ClaimStatus = row[7].ToString(),
-                 ClaimNumber = row[8].ToString(),
-                 OriginalClaimNumber = row[9].ToString(),
-                 PerscriptionNumber = row.ItemArray[10] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[10]),
-                 NDCCode = row.ItemArray[11] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[11]),
-                 DrugName = row[12].ToString(),
-                 OTCIndicator = row[13].ToString(),
-                 Multisource = row.ItemArray[14] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[14]),
-                 DEASchedule = row.ItemArray[15] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[15]),
-                 DiagnosisCode = row[16].ToString(),
-                 DWAIndecator = row.ItemArray[17] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[17]),
-                 DaysSupply = row.ItemArray[18] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[18]),
-                 BilledAmount = row.ItemArray[19] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[19]),
-                 PharmacyProviderID = row[20].ToString(),
-                 PrescribingProviderID = row.ItemArray[21] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[21]),
-                 RefillCode = row.ItemArray[22] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[22]),
-                 blankSpace = row.ItemArray[23] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[23]),
-                 NCPDPrejectcodes = row[24].ToString(),
-                 NPI = row.ItemArray[25] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[25]),
-                 Last_Name = row[26].ToString(),
-                 First_Name = row[27].ToString(),
-                 Address = row[28].ToString(),
-                 City = row[29].ToString(),
-                 State = row[30].ToString(),
-                 Zip_Code = row[31].ToString(),
-        };
+                MemberId = row.ItemArray[0] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[0]),
+                MemberLastName = row[1].ToString(),
+                MemberFirstName = row[2].ToString(),
+                MemberMiddleInitial = row[3].ToString(),
+                DateofBirth = row.ItemArray[4] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[4]),
+                Gender = row[5].ToString(),
+                FillDate = row.ItemArray[6] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[6]),
+                ClaimStatus = row[7].ToString(),
+                ClaimNumber = row[8].ToString(),
+                OriginalClaimNumber = row[9].ToString(),
+                PerscriptionNumber = row.ItemArray[10] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[10]),
+                NDCCode = row.ItemArray[11] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[11]),
+                DrugName = row[12].ToString(),
+                OTCIndicator = row[13].ToString(),
+                Multisource = row.ItemArray[14] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[14]),
+                DEASchedule = row.ItemArray[15] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[15]),
+                DiagnosisCode = row[16].ToString(),
+                DWAIndecator = row.ItemArray[17] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[17]),
+                DaysSupply = row.ItemArray[18] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[18]),
+                BilledAmount = row.ItemArray[19] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[19]),
+                PharmacyProviderID = row[20].ToString(),
+                PrescribingProviderID = row.ItemArray[21] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[21]),
+                RefillCode = row.ItemArray[22] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[22]),
+                blankSpace = row.ItemArray[23] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[23]),
+                NCPDPrejectcodes = row[24].ToString(),
+                NPI = row.ItemArray[25] == DBNull.Value ? -1 : Convert.ToDouble(row.ItemArray[25]),
+                Last_Name = row[26].ToString(),
+                First_Name = row[27].ToString(),
+                Address = row[28].ToString(),
+                City = row[29].ToString(),
+                State = row[30].ToString(),
+                Zip_Code = row[31].ToString(),
+                DateAdded = specialId.ToString(), 
+            };
 
         }
     }

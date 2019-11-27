@@ -23,6 +23,7 @@ namespace CapStone.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Pharmacy> Pharmacy { get; set; }
+        public DbSet<PharmacyDb> PharmacyDbs { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

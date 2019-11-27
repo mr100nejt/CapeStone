@@ -43,6 +43,7 @@ namespace CapStone.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zip_Code { get; set; }
+        public string DateAdded { get; set;  }
 
 
     }
