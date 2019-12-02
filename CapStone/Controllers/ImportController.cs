@@ -9,9 +9,11 @@ using System.Web.Mvc;
 
 namespace AspDotNetMVCDemo.Controllers
 {
+
     public class ImportController : Controller
     {
-        int specialId = 0; 
+        ApplicationDbContext db = new ApplicationDbContext();
+        int specialId = 0;
         // GET: Import
         public ActionResult Index()
         {
@@ -26,7 +28,7 @@ namespace AspDotNetMVCDemo.Controllers
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
+           
             if (postedFile != null)
             {
                 try
@@ -102,7 +104,7 @@ namespace AspDotNetMVCDemo.Controllers
 
                     List<Pharmacy> pharmList = new List<Pharmacy>();
                     //Loop through datatable and add employee data to employee table. 
-                    specialId = specialId++; 
+                    specialId = specialId++;
                     foreach (DataRow row in dt.Rows)
                     {
                         db.Pharmacy.Add(GetInfoFromExcelRow(row));
@@ -111,6 +113,7 @@ namespace AspDotNetMVCDemo.Controllers
                     db.SaveChanges();
 
                     ViewBag.Message = "Data Imported Successfully.";
+
                 }
                 catch (Exception ex)
                 {
@@ -170,9 +173,19 @@ namespace AspDotNetMVCDemo.Controllers
                 City = row[29].ToString(),
                 State = row[30].ToString(),
                 Zip_Code = row[31].ToString(),
-                DateAdded = specialId.ToString(), 
+                DateAdded = specialId.ToString(),
             };
 
+        }
+        public ActionResult Add()
+        {
+            var today = DateTime.Now;
+           today = today.ToString();
+            new PharmacyDb
+            {
+                DateEntered = 
+            }
+           db.PharmacyDbs.Add() ; 
         }
     }
 }
