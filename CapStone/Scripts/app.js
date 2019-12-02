@@ -56,9 +56,39 @@
             $.each(data, function(index, value){
                 $('#movieTable').append(
                     "<tr>" +
-                    "<td>" + value.MemberId  + "</td>" +
-                    "<td> <form id='viewDetails'> <input type='hidden' name='id' value ="+value.MemberId +" > <button type='submit'>Details</button> </form> </td>" +
                     
+                    "<td>" + data.Title + "</td>" +
+                    "<td>" + data.MemberId + "</td>" +
+                    "<td>" + data.MemberLastName + "</td>" +
+                    "<td>" + data.MemberMiddleInitial + "</td>" +
+                    "<td>" + data.DateofBirth + "</td>" +
+                    "<td>" + data.Gender + "</td>" +
+                    "<td>" + data.FillDate + "</td>" +
+                    "<td>" + data.ClaimStatus + "</td>" +
+                    "<td>" + data.ClaimNumber + "</td>" +
+                    "<td>" + data.OriginalClaimNumber + "</td>" +
+                    "<td>" + data.PerscriptionNumber + "</td>" +
+                    "<td>" + data.NDCCode + "</td>" +
+                    "<td>" + data.DrugName + "</td>" +
+                    "<td>" + data.OTCIndicator + "</td>" +
+                    "<td>" + data.Multisource + "</td>" +
+                    "<td>" + data.DEASchedule + "</td>" +
+                    "<td>" + data.DiagnosisCode + "</td>" +
+                    "<td>" + data.DWAIndecator + "</td>" +
+                    "<td>" + data.DaysSupply + "</td>" +
+                    "<td>" + data.BilledAmount + "</td>" +
+                    "<td>" + data.PharmacyProviderID + "</td>" +
+                    "<td>" + data.PrescribingProviderID + "</td>" +
+                    "<td>" + data.RefillCode + "</td>" +
+                    "<td>" + data.NCPDPrejectcodes + "</td>" +
+                    "<td>" + data.NPI + "</td>" +
+                    "<td>" + data.Last_Name + "</td>" +
+                    "<td>" + data.First_Name + "</td>" +
+                    "<td>" + data.Address + "</td>" +
+                    "<td>" + data.City + "</td>" +
+                    "<td>" + data.State + "</td>" +
+                    "<td>" + data.Zip_Code + "</td>" +
+                        
                     "</tr>"
                 );
             });
@@ -119,14 +149,13 @@
 
     function viewDetails( e ){
      
-        var dict = this["id"].value;
-        console.log(dict);
-        console.log(e);
+        var dict =e;
+        
         
         $.ajax({
             url: 'https://localhost:44365/api/pharmacy/'+ dict,
             dataType: 'json',
-            type: 'get',
+            type: 'put',
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
@@ -148,9 +177,36 @@
                 $('#detailsTable').append(
                     "<tr>" +
                     "<td>" + data.Title + "</td>" +
-                    "<td>" + data.Genre + "</td>" +
-                    "<td>" + data.Director + "</td>" +
-                    "<td> <form id='updateForm'> <input type='hidden' name='id' value ="+data.MovieId+" > <button type='submit'>Update</button> </form> </td>" +
+                    "<td>" + data.MemberId + "</td>" +
+                    "<td>" + data.MemberLastName + "</td>" +
+                    "<td>" + data.MemberMiddleInitial + "</td>" +
+                    "<td>" + data.DateofBirth + "</td>" +
+                    "<td>" + data.Gender + "</td>" +
+                    "<td>" + data.FillDate + "</td>" +
+                    "<td>" + data.ClaimStatus + "</td>" +
+                    "<td>" + data.ClaimNumber + "</td>" +
+                    "<td>" + data.OriginalClaimNumber + "</td>" +
+                    "<td>" + data.PerscriptionNumber + "</td>" +
+                    "<td>" + data.NDCCode + "</td>" +
+                    "<td>" + data.DrugName + "</td>" +
+                    "<td>" + data.OTCIndicator + "</td>" +
+                    "<td>" + data.Multisource + "</td>" +
+                    "<td>" + data.DEASchedule + "</td>" +
+                    "<td>" + data.DiagnosisCode + "</td>" +
+                    "<td>" + data.DWAIndecator + "</td>" +
+                    "<td>" + data.DaysSupply + "</td>" +
+                    "<td>" + data.BilledAmount + "</td>" +
+                    "<td>" + data.PharmacyProviderID + "</td>" +
+                    "<td>" + data.PrescribingProviderID + "</td>" +
+                    "<td>" + data.RefillCode + "</td>" +
+                    "<td>" + data.NCPDPrejectcodes + "</td>" +
+                    "<td>" + data.NPI + "</td>" +
+                    "<td>" + data.Last_Name + "</td>" +
+                    "<td>" + data.First_Name + "</td>" +
+                    "<td>" + data.Address + "</td>" +
+                    "<td>" + data.City + "</td>" +
+                    "<td>" + data.State + "</td>" +
+                    "<td>" + data.Zip_Code + "</td>" +
                     "</tr>"
                 );
                 $('#updateForm').submit( updateForm );
@@ -164,49 +220,14 @@
     
     
    function update( e ){
-            var newDict = {
-                MemberId: this[" memberId"].value,
-                MemberLastName: this["memberLastName"].value,
-                MemberMiddleInitial: this[" memberMiddleInitial"].value,
-                DateofBirth: this[" dateofBirth"].value,
-                Gender: this[" gender"].value,
-                FillDate: this["F=fillDate"].value,
-                ClaimStatus: this["claimStatus"].value,
-                ClaimNumber: this["claimNumber"].value,
-                OriginalClaimNumber: this["originalClaimNumber"].value,
-                PerscriptionNumber: this["perscriptionNumber"].value,
-                NDCCode: this["nDCCode"].value,
-                DrugName: this["drugName"].value,
-                OTCIndicator: this["oTCIndicator"].value,
-                Multisource: this["multisource"].value,
-                DEASchedule: this["dEASchedule"].value,
-                DiagnosisCode: this["diagnosisCode"].value,
-                DWAIndecator: this["dWAIndecator"].value,
-                DaysSupply: this["daysSupply"].value,
-                BilledAmount: this["billedAmount"].value,
-                PharmacyProviderID: this["pharmacyProviderID"].value,
-                PrescribingProviderID: this["prescribingProviderID"].value,
-                RefillCode: this["refillCode"].value,
-                NCPDPrejectcodes: this["nCPDPrejectcodes"].value,
-                NPI: this["nPI"].value,
-                Last_Name: this["last_Name"].value,
-                First_Name: this["first_Name"].value,
-                Address: this["address"].value,
-                City: this["city"].value,
-                State: this["state"].value,
-                Zip_Code: this["zip_Code"].value,
-
-           : this["title"].value,
-           Genre : this["genre"].value,
-           Director: this["director"].value
-       };
+           
        
        $.ajax({
            url: 'https://localhost:44365/api/pharmacy/',
            dataType: 'json',
            type: 'put',
            contentType: 'application/json',
-           data: JSON.stringify(newDict),
+           data: 1,
            success: function( data, textStatus, jQxhr ){
                $('#response pre').html( data );
            },
@@ -216,10 +237,38 @@
        }).then(function(data) {
            $('#formTable').html('');
                $('tbody').append(
-                   "<tr>" +
-                   "<td>" + data.Title + "</td>" +
-                   "<td>" + data.Genre + "</td>" +
-                   "<td>" + data.Director + "</td>" +
+                "<tr>" +
+                "<td>" + data.Title + "</td>" +
+                "<td>" + data.MemberId + "</td>" +
+                "<td>" + data.MemberLastName + "</td>" +
+                "<td>" + data.MemberMiddleInitial + "</td>" +
+                "<td>" + data.DateofBirth + "</td>" +
+                "<td>" + data.Gender + "</td>" +
+                "<td>" + data.FillDate + "</td>" +
+                "<td>" + data.ClaimStatus + "</td>" +
+                "<td>" + data.ClaimNumber + "</td>" +
+                "<td>" + data.OriginalClaimNumber + "</td>" +
+                "<td>" + data.PerscriptionNumber + "</td>" +
+                "<td>" + data.NDCCode + "</td>" +
+                "<td>" + data.DrugName + "</td>" +
+                "<td>" + data.OTCIndicator + "</td>" +
+                "<td>" + data.Multisource + "</td>" +
+                "<td>" + data.DEASchedule + "</td>" +
+                "<td>" + data.DiagnosisCode + "</td>" +
+                "<td>" + data.DWAIndecator + "</td>" +
+                "<td>" + data.DaysSupply + "</td>" + 
+                "<td>" + data.BilledAmount + "</td>" +
+                "<td>" + data.PharmacyProviderID + "</td>" +
+                "<td>" + data.PrescribingProviderID + "</td>" +
+                "<td>" + data.RefillCode + "</td>" +
+                "<td>" + data.NCPDPrejectcodes + "</td>" +
+                "<td>" + data.NPI + "</td>" +
+                "<td>" + data.Last_Name + "</td>" +
+                "<td>" + data.First_Name + "</td>" +
+                "<td>" + data.Address + "</td>" +
+                "<td>" + data.City + "</td>" +
+                "<td>" + data.State + "</td>" +
+                "<td>" + data.Zip_Code + "</td>" +
                    "</tr>"
                );
        }

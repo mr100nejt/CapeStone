@@ -35,14 +35,18 @@ namespace CapStone.Controllers
         public void Put([FromBody]Pharmacy value)
         {
             // Update 
-
-
-            var distinctItems = db.Pharmacy.Distinct(new DistinctItemComparer());
-            foreach (var item in distinctItems)
+            DistinctItemComparer compae = new DistinctItemComparer();
+            foreach(var item in db.Pharmacy)
             {
-                db.Pharmacy.Remove(item);
+                  var distinctItems = db.Pharmacy.Where(e => e.MemberId == item.MemberId );
+                foreach (var i in distinctItems)
+                {
+                    db.Pharmacy.Remove(i);
+                }
             }
-
+        
+      
+            db.SaveChanges();
 
 
         }
@@ -53,12 +57,13 @@ namespace CapStone.Controllers
             {
                 return phrm1.MemberId == phrm2.MemberId &&
                        phrm1.MemberFirstName == phrm2.MemberFirstName;
+
             }
             public int GetHashCode(Pharmacy obj)
             {
                 return obj.MemberId.GetHashCode() ^
-                       obj.MemberFirstName.GetHashCode() ^
-                       obj.MemberLastName.GetHashCode();
+                       obj.MemberFirstName.GetHashCode();
+                       
 
             }
         }

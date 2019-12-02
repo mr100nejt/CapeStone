@@ -178,6 +178,10 @@ namespace AspDotNetMVCDemo.Controllers
             };
 
         }
+        public ActionResult Edit()
+        {
+            return View(); 
+        }
         public void AddToFinalTable()
         {
             var today = DateTime.Now.ToString();
