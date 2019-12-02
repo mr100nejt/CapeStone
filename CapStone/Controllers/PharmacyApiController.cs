@@ -15,7 +15,7 @@ namespace CapStone.Controllers
         public IEnumerable<Pharmacy> Get()
         {
             var pharm = db.Pharmacy.ToArray();
-            return pharm; 
+            return pharm;
         }
 
         // GET: api/Pharmacy/5
@@ -27,24 +27,24 @@ namespace CapStone.Controllers
         // POST: api/Pharmacy
         public void Post([FromBody]Pharmacy value)
         {
-            // Create movie in db logic
-            
+           //add
+
         }
 
         // PUT api/values/5
-        public void Put( [FromBody]Pharmacy value)
+        public void Put([FromBody]Pharmacy value)
         {
-            // Update movie in db logic
-          
-            
+            // Update 
+
+
             var distinctItems = db.Pharmacy.Distinct(new DistinctItemComparer());
-            foreach(var item in distinctItems)
+            foreach (var item in distinctItems)
             {
-                 db.Pharmacy.Remove(item);
+                db.Pharmacy.Remove(item);
             }
-          
-            
-          
+
+
+
         }
         class DistinctItemComparer : IEqualityComparer<Pharmacy>
         {
@@ -52,15 +52,15 @@ namespace CapStone.Controllers
             public bool Equals(Pharmacy phrm1, Pharmacy phrm2)
             {
                 return phrm1.MemberId == phrm2.MemberId &&
-                  phrm1.MemberFirstName == phrm2.MemberFirstName;
+                       phrm1.MemberFirstName == phrm2.MemberFirstName;
             }
             public int GetHashCode(Pharmacy obj)
             {
                 return obj.MemberId.GetHashCode() ^
-                    obj.MemberFirstName.GetHashCode() ^
-                    obj.MemberLastName.GetHashCode();
-                   
+                       obj.MemberFirstName.GetHashCode() ^
+                       obj.MemberLastName.GetHashCode();
+
             }
         }
-  
+    }
 }

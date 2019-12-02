@@ -164,14 +164,45 @@
     
     
    function update( e ){
-       var newDict = {
-           Title : this["title"].value,
+            var newDict = {
+                MemberId: this[" memberId"].value,
+                MemberLastName: this["memberLastName"].value,
+                MemberMiddleInitial: this[" memberMiddleInitial"].value,
+                DateofBirth: this[" dateofBirth"].value,
+                Gender: this[" gender"].value,
+                FillDate: this["F=fillDate"].value,
+                ClaimStatus: this["claimStatus"].value,
+                ClaimNumber: this["claimNumber"].value,
+                OriginalClaimNumber: this["originalClaimNumber"].value,
+                PerscriptionNumber: this["perscriptionNumber"].value,
+                NDCCode: this["nDCCode"].value,
+                DrugName: this["drugName"].value,
+                OTCIndicator: this["oTCIndicator"].value,
+                Multisource: this["multisource"].value,
+                DEASchedule: this["dEASchedule"].value,
+                DiagnosisCode: this["diagnosisCode"].value,
+                DWAIndecator: this["dWAIndecator"].value,
+                DaysSupply: this["daysSupply"].value,
+                BilledAmount: this["billedAmount"].value,
+                PharmacyProviderID: this["pharmacyProviderID"].value,
+                PrescribingProviderID: this["prescribingProviderID"].value,
+                RefillCode: this["refillCode"].value,
+                NCPDPrejectcodes: this["nCPDPrejectcodes"].value,
+                NPI: this["nPI"].value,
+                Last_Name: this["last_Name"].value,
+                First_Name: this["first_Name"].value,
+                Address: this["address"].value,
+                City: this["city"].value,
+                State: this["state"].value,
+                Zip_Code: this["zip_Code"].value,
+
+           : this["title"].value,
            Genre : this["genre"].value,
            Director: this["director"].value
        };
-       var dict =  this["id"].value;
+       
        $.ajax({
-           url: 'https://localhost:44365/api/pharmacy/'+ dict,
+           url: 'https://localhost:44365/api/pharmacy/',
            dataType: 'json',
            type: 'put',
            contentType: 'application/json',

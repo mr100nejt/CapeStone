@@ -1,4 +1,5 @@
 ﻿using CapStone.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,7 @@ namespace AspDotNetMVCDemo.Controllers
     public class ImportController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        int specialId = 0;
+        int specialId = 1;
         // GET: Import
         public ActionResult Index()
         {
@@ -102,7 +103,7 @@ namespace AspDotNetMVCDemo.Controllers
 
                     //Insert records to Employee table.
 
-                    List<Pharmacy> pharmList = new List<Pharmacy>();
+                 
                     //Loop through datatable and add employee data to employee table. 
                     specialId = specialId++;
                     foreach (DataRow row in dt.Rows)
@@ -111,7 +112,7 @@ namespace AspDotNetMVCDemo.Controllers
                     }
 
                     db.SaveChanges();
-
+                    AddToFinalTable();
                     ViewBag.Message = "Data Imported Successfully.";
 
                 }
@@ -177,15 +178,18 @@ namespace AspDotNetMVCDemo.Controllers
             };
 
         }
-        public ActionResult Add()
+        public void AddToFinalTable()
         {
-            var today = DateTime.Now;
-           today = today.ToString();
-            new PharmacyDb
+            var today = DateTime.Now.ToString();
+            var currentUser = User.Identity.GetUserId();
+            db.PharmacyDbs.Add(new PharmacyDb
             {
-                DateEntered = 
-            }
-           db.PharmacyDbs.Add() ; 
+                DateEntered = today,
+                ApplicationId = currentUser
+            });
+            db.SaveChanges();
+            RedirectToAction("index");
         }
+           
     }
 }
