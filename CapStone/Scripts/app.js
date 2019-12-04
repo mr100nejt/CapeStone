@@ -57,7 +57,6 @@
                 $('#movieTable').append(
                     "<tr>" +
                     
-                    "<td>" + data.Title + "</td>" +
                     "<td>" + data.MemberId + "</td>" +
                     "<td>" + data.MemberLastName + "</td>" +
                     "<td>" + data.MemberMiddleInitial + "</td>" +
@@ -88,7 +87,7 @@
                     "<td>" + data.City + "</td>" +
                     "<td>" + data.State + "</td>" +
                     "<td>" + data.Zip_Code + "</td>" +
-                        
+                    "<td> <form id='viewDetails'> <input type='hidden' name='id' value =" + value.MemberId + " > <button type='submit'>Details</button> </form> </td>" + 
                     "</tr>"
                 );
             });
@@ -103,59 +102,21 @@
     
 
 
-    function searchById( e ){
-        var dict =  this["id"].value;
-        console.log(dict);
-        console.log(e);
-        $.ajax({
-            url: 'https://localhost:44365/api/pharmacy/'+ dict,
-            dataType: 'json',
-            type: 'get',
-            contentType: 'application/json',
-            data: JSON.stringify(dict),
-            success: function( data, textStatus, jQxhr ){
-                $('#response pre').html( data );
-            },
-            error: function( jqXhr, textStatus, errorThrown ){
-                console.log( errorThrown );
-            }
-        }).then(function(data) {
-            $('#detailsHeader').html('');
-            $('#detailsTable').html('');
-            $('#detailsHeader').append(
-                "<tr>" +
-                "<th> Title </th>" +
-                "<th> Genre </th>" +
-                "<th> Director </th>" +
-                "</tr>"
-            );
-                $('#detailsTable').append(
-                    "<tr>" +
-                    "<td>" + data.Title + "</td>" +
-                    "<td>" + data.Genre + "</td>" +
-                    "<td>" + data.Director + "</td>" +
-                    "<td> <form id='updateForm'> <input type='hidden' name='id' value ="+data.MovieId+" > <button type='submit'>Update</button> </form> </td>" +
-                    "</tr>"
-                );
-                $('#updateForm').submit( updateForm );
-        }
-        )
-        e.preventDefault();
-    }
-    $('#searchById').submit( searchById );
  
     
 
 
     function viewDetails( e ){
      
-        var dict =e;
+        var dict = {
+            MemberId: this["memberId"].value
+        }
         
         
         $.ajax({
             url: 'https://localhost:44365/api/pharmacy/'+ dict,
             dataType: 'json',
-            type: 'put',
+            type: 'edit',
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
@@ -238,7 +199,7 @@
            $('#formTable').html('');
                $('tbody').append(
                 "<tr>" +
-                "<td>" + data.Title + "</td>" +
+               
                 "<td>" + data.MemberId + "</td>" +
                 "<td>" + data.MemberLastName + "</td>" +
                 "<td>" + data.MemberMiddleInitial + "</td>" +

@@ -34,17 +34,17 @@ namespace CapStone.Models
         public string PharmacyProviderID { get; set; }
         public double? PrescribingProviderID { get; set; }
         public double? RefillCode { get; set; }
-        public double? blankSpace{ get; set;}
+        public double? blankSpace { get; set; }
         public string NCPDPrejectcodes { get; set; }
-        public double? NPI  { get; set; }
+        public double? NPI { get; set; }
         public string Last_Name { get; set; }
         public string First_Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip_Code { get; set; }
-        public string DateAdded { get; set;  }
-
+        public string DateAdded { get; set; }
+        public bool Watch {get; set;}
 
     }
 }
