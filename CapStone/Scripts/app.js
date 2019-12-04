@@ -87,11 +87,11 @@
                     "<td>" + data.City + "</td>" +
                     "<td>" + data.State + "</td>" +
                     "<td>" + data.Zip_Code + "</td>" +
-                    "<td> <form id='viewDetails'> <input type='hidden' name='id' value =" + value.MemberId + " > <button type='submit'>Details</button> </form> </td>" + 
+                    "<td> <form id='addWatch'> <input type='hidden' name='id' value =" + value.MemberId + " > <button type='submit'></button> </form> </td>" + 
                     "</tr>"
                 );
             });
-            $('#viewDetails').submit( viewDetails );
+            $('#addWatch').submit( addWatch );
         }
         )
         e.preventDefault();
@@ -106,7 +106,7 @@
     
 
 
-    function viewDetails( e ){
+    function addWatch( e ){
      
         var dict = {
             MemberId: this["memberId"].value
@@ -180,7 +180,7 @@
  
     
     
-   function update( e ){
+   function removeDupes( e ){
            
        
        $.ajax({

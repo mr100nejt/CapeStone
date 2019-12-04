@@ -6,24 +6,66 @@
 
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
 
+   
+    text {
+    color: blue;
+    }
+    button {
+    border-radius: 50%;
+    }
+    button {
+
+    transition-duration: 0.4s;
+    }
+
+    button:hover {
+    background-color: blue; /* Green */
+    color: white;
+    outline: none;
+
+    }
+    table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    }
+    table th {
+    border-collapse: collapse;
+    border: 1px solid black;
+    color:white;
+    }
+    table td {
+    border: 1px solid black;
+    }
+    table tr:first-child td {
+    border-top: 0;
+    }
+    table tr td:first-child {
+    border-left: 0;
+    }
+    table tr:last-child td {
+    border-bottom: 0;
+    }
+    table tr td:last-child {
+    border-right: 0;
+    }
+    tr:hover {background-color:#c7cdd6;}
+    </style>
+</head>
 <body>
 
     <div id="response">
         <pre></pre>
     </div>
 
-    <form id="addForm">
-        <input type="text" name="title" placeholder="Title" />
-        <input type="text" name="genre" placeholder="Genre" />
-        <input type="text" name="director" placeholder="Director" />
-
-        <button type="submit">Add</button>
-    </form>
+   
 
 
-
-    <form id="update">
+    <form id="removeDupes">
         <button type="submit">Remove Duplicates</button>
     </form>
    
