@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -45,6 +46,10 @@ namespace CapStone.Models
         public string Zip_Code { get; set; }
         public string DateAdded { get; set; }
         public bool Watch {get; set;}
+        public int specialId { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }

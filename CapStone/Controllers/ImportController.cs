@@ -20,12 +20,10 @@ namespace AspDotNetMVCDemo.Controllers
         {
             return View();
         }
+      
 
-        /// <summary>
-        /// Post method for importing users 
-        /// </summary>
         /// <param name="postedFile"></param>
-        /// <returns></returns>
+
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
@@ -175,7 +173,8 @@ namespace AspDotNetMVCDemo.Controllers
                 State = row[30].ToString(),
                 Zip_Code = row[31].ToString(),
                 DateAdded = specialId.ToString(),
-            };
+                ApplicationId = User.Identity.GetUserId(),
+        };
 
         }
         public ActionResult Edit()

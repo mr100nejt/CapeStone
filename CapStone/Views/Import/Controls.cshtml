@@ -13,20 +13,25 @@
     text {
     color: blue;
     }
-    button {
-    border-radius: 50%;
+   a.button {
+        display: inline-block;
+        padding: 0.2em 1.2em;
+        border: 0.1em solid #FFFFFF;
+        margin: 0 0.3em 0.3em 0;
+        border-radius: 0.12em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        color: #333333;
+        text-align: center;
+        transition: all 0.2s;
+        background-color:#89C9FF;
     }
-    button {
-
-    transition-duration: 0.4s;
-    }
-
-    button:hover {
-    background-color: blue; /* Green */
-    color: white;
-    outline: none;
-
-    }
+        a.button:hover {
+            color: #000000;
+            background-color: #FFFFFF;
+        }
     table {
     border-collapse: collapse;
     border: 1px solid black;
@@ -62,19 +67,16 @@
         <pre></pre>
     </div>
 
-   
 
 
-    <form id="removeDupes">
+
+    <form id="update">
         <button type="submit">Remove Duplicates</button>
     </form>
-   
-    <form id="viewTable">
 
-
-        <button type="submit">View All</button>
+    <form id="export">
+        <button type="submit">export</button>
     </form>
-
 
     <br>
     <div id='movieHeader'>
@@ -110,17 +112,6 @@
     <br>
     <br>
     <br>
-
-
-
-
-
-    <form id="searchById">
-        <input type="text" name="id" placeholder="Id" />
-        <button type="submit">Search</button>
-    </form>
-
-  
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="~/Scripts/app.js"></script>

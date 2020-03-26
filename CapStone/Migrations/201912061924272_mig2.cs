@@ -3,7 +3,7 @@ namespace CapStone.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class intial : DbMigration
+    public partial class mig2 : DbMigration
     {
         public override void Up()
         {
@@ -46,23 +46,15 @@ namespace CapStone.Migrations
                         Zip_Code = c.String(),
                         DateAdded = c.String(),
                         Watch = c.Boolean(nullable: false),
+                        specialId = c.Int(nullable: false),
+                        ApplicationId = c.String(maxLength: 128),
                         PharmacyDb_PharmacyId = c.Int(),
                     })
                 .PrimaryKey(t => t.PharmacyDataId)
-                .ForeignKey("dbo.PharmacyDbs", t => t.PharmacyDb_PharmacyId)
-                .Index(t => t.PharmacyDb_PharmacyId);
-            
-            CreateTable(
-                "dbo.PharmacyDbs",
-                c => new
-                    {
-                        PharmacyId = c.Int(nullable: false, identity: true),
-                        DateEntered = c.String(),
-                        ApplicationId = c.String(maxLength: 128),
-                    })
-                .PrimaryKey(t => t.PharmacyId)
                 .ForeignKey("dbo.AspNetUsers", t => t.ApplicationId)
-                .Index(t => t.ApplicationId);
+                .ForeignKey("dbo.PharmacyDbs", t => t.PharmacyDb_PharmacyId)
+                .Index(t => t.ApplicationId)
+                .Index(t => t.PharmacyDb_PharmacyId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -123,6 +115,18 @@ namespace CapStone.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.PharmacyDbs",
+                c => new
+                    {
+                        PharmacyId = c.Int(nullable: false, identity: true),
+                        DateEntered = c.String(),
+                        ApplicationId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.PharmacyId)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationId)
+                .Index(t => t.ApplicationId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -139,23 +143,25 @@ namespace CapStone.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Pharmacies", "PharmacyDb_PharmacyId", "dbo.PharmacyDbs");
             DropForeignKey("dbo.PharmacyDbs", "ApplicationId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Pharmacies", "ApplicationId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.PharmacyDbs", new[] { "ApplicationId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.PharmacyDbs", new[] { "ApplicationId" });
             DropIndex("dbo.Pharmacies", new[] { "PharmacyDb_PharmacyId" });
+            DropIndex("dbo.Pharmacies", new[] { "ApplicationId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.PharmacyDbs");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.PharmacyDbs");
             DropTable("dbo.Pharmacies");
         }
     }
